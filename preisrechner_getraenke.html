@@ -38,18 +38,17 @@
       color: #f6dfe2;
     }
     main { width: min(100%, 440px); margin: 0 auto; padding: 24px 12px; }
-    .title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
     h1 { margin: 0; font-size: 1.8rem; }
-    .hint { margin: 0 0 28px; color: #4b6057; line-height: 1.5; }
     .back {
       margin-left: auto;
       flex: none;
       min-height: 0;
       padding: 8px 14px;
-      border: 1px solid #e3b7bc;
+      border: 1px solid #cdd6ce;
       border-radius: 10px;
-      background: #f7dcdd;
-      color: #7a1220;
+      background: #e6e8e4;
+      color: #3b4a43;
       font-size: .9rem;
       font-weight: 600;
       text-decoration: none;
@@ -114,7 +113,6 @@
     .total { margin-left: auto; text-align: right; }
     .total label { display: block; font-size: 1rem; }
     #total { display: block; font-size: clamp(2rem, 7vw, 3rem); font-weight: 750; }
-    .note { margin-top: 22px; font-size: .85rem; color: #4b6057; line-height: 1.5; }
   </style>
 </head>
 <body>
@@ -127,7 +125,6 @@
       <h1>Preisrechner Getr&auml;nke</h1>
       <a class="back" href="./index.html" aria-label="Zur&uuml;ck zur Auswahl">&larr; Back</a>
     </div>
-    <p class="hint">Getr&auml;nkepreise inklusive 3 &euro; Pfand pro Tasse.</p>
 
     <div class="head" aria-hidden="true"><span>Einzelpreis</span><span>Anzahl / Summe</span></div>
     <section aria-label="Getr&auml;nke und Pfandr&uuml;ckgabe">
@@ -181,9 +178,6 @@
         <output id="total" aria-live="polite" aria-atomic="true">0,00 &euro;</output>
       </div>
     </footer>
-    <p class="note">
-      Pfandr&uuml;ckgaben werden abgezogen. Ein negativer Gesamtbetrag ist eine Auszahlung.
-    </p>
     <noscript>Bitte JavaScript aktivieren, um den Preisrechner zu verwenden.</noscript>
   </main>
   <script>
