@@ -67,13 +67,13 @@
     .head { margin-bottom: 8px; color: #4b6057; font-size: .75rem; }
     .head span:first-child { grid-column: 2; }
     .head span:last-child { grid-column: 4; }
-    .item { margin-bottom: 20px; }
+    .item { margin-bottom: 14px; }
     button {
-      min-height: 116px;
+      min-height: 84px;
       border: 0;
       border-radius: 14px;
       font: inherit;
-      font-size: 3.5rem;
+      font-size: 2.6rem;
       font-weight: 650;
       cursor: pointer;
       touch-action: manipulation;
@@ -162,6 +162,16 @@
           <output class="subtotal" id="pfand-subtotal" aria-label="Summe Pfandr&uuml;ckgabe">0,00 &euro;</output>
         </div>
       </div>
+      <div class="item">
+        <button type="button" class="minus" data-item="flasche" data-change="-1"
+                aria-label="Flasche weniger" disabled>&minus;</button>
+        <div class="name">Flasche<span class="price">8,00 &euro;<br>kein Pfand</span></div>
+        <button type="button" class="plus" data-item="flasche" data-change="1" aria-label="Flasche mehr">+</button>
+        <div class="quantity">
+          <output class="count" id="flasche-count" aria-label="Anzahl Flasche">0</output>
+          <output class="subtotal" id="flasche-subtotal" aria-label="Summe Flasche">0,00 &euro;</output>
+        </div>
+      </div>
     </section>
 
     <footer>
@@ -182,7 +192,8 @@
     const items = {
       wein: { count: 0, cents: 700 },
       kipu: { count: 0, cents: 600 },
-      pfand: { count: 0, cents: -300 }
+      pfand: { count: 0, cents: -300 },
+      flasche: { count: 0, cents: 800 }
     };
     const currency = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
     const controls = document.querySelectorAll("[data-item]");
