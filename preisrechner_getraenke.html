@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7a1220">
+  <title>Nikolausmarkt 2026 &ndash; Preisrechner</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f3f4ef;
+      color: #172e27;
+      font-family: system-ui, sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+    .banner {
+      background: #7a1220;
+      color: #fff;
+      padding: 12px 12px;
+      text-align: center;
+      border-bottom: 5px solid #5a0c17;
+    }
+    .banner-title {
+      display: block;
+      font-size: clamp(1.7rem, 7vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: .02em;
+      line-height: 1.15;
+    }
+    .banner-subtitle {
+      display: block;
+      margin-top: 2px;
+      font-size: clamp(1.35rem, 5.6vw, 1.9rem);
+      font-weight: 600;
+      letter-spacing: .01em;
+      line-height: 1.2;
+      color: #f6dfe2;
+    }
+    main { width: min(100%, 440px); margin: 0 auto; padding: 24px 12px; }
+    h1 { margin: 0 0 8px; font-size: 1.8rem; }
+    .hint { margin: 0 0 28px; color: #4b6057; line-height: 1.5; }
+    .back { display: inline-block; margin-bottom: 16px; color: #7a1220; font-size: .95rem; }
+    .head, .item {
+      display: grid;
+      grid-template-columns: minmax(56px, 1fr) minmax(76px, .95fr) minmax(56px, 1fr) minmax(68px, .9fr);
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+    }
+    .head { margin-bottom: 8px; color: #4b6057; font-size: .75rem; }
+    .head span:first-child { grid-column: 2; }
+    .head span:last-child { grid-column: 4; }
+    .item { margin-bottom: 20px; }
+    button {
+      min-height: 116px;
+      border: 0;
+      border-radius: 14px;
+      font: inherit;
+      font-size: 3.5rem;
+      font-weight: 650;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .minus { background: #e0e7e1; color: #174b3d; }
+    .plus { background: #174b3d; color: #fff; }
+    button:active:not(:disabled) { transform: scale(.96); }
+    button:focus-visible { outline: 3px solid #aa5700; outline-offset: 3px; }
+    button:disabled { opacity: .35; cursor: default; }
+    .name { font-size: 1.35rem; font-weight: 700; }
+    .price, .detail { display: block; margin-top: 4px; font-size: .8rem; font-weight: 400; color: #4b6057; line-height: 1.35; }
+    .quantity {
+      min-width: 0;
+      border-left: 1px solid #cdd6ce;
+      padding-left: 6px;
+      overflow-wrap: anywhere;
+    }
+    .count { display: block; font-size: 2rem; font-weight: 700; }
+    .subtotal { display: block; font-size: .85rem; color: #4b6057; }
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 2px solid #cdd6ce;
+      margin-top: 28px;
+      padding-top: 24px;
+    }
+    #reset {
+      min-height: 84px;
+      padding: 12px 48px;
+      background: #f7dcdd;
+      color: #7a1220;
+      font-size: 1.1rem;
+    }
+    .total { margin-left: auto; text-align: right; }
+    .total label { display: block; font-size: 1rem; }
+    #total { display: block; font-size: clamp(2rem, 7vw, 3rem); font-weight: 750; }
+    .note { margin-top: 22px; font-size: .85rem; color: #4b6057; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <header class="banner">
+    <span class="banner-title">Nikolausmarkt 2026</span>
+    <span class="banner-subtitle">F&ouml;rderverein Kita St. Joseph</span>
+  </header>
+  <main>
+    <a class="back" href="./index.html">&larr; Zur&uuml;ck zur Auswahl</a>
+    <h1>Preisrechner Getr&auml;nke</h1>
+    <p class="hint">Getr&auml;nkepreise inklusive 3 &euro; Pfand pro Tasse.</p>
+
+    <div class="head" aria-hidden="true"><span>Einzelpreis</span><span>Anzahl / Summe</span></div>
+    <section aria-label="Getr&auml;nke und Pfandr&uuml;ckgabe">
+      <div class="item">
+        <button type="button" class="minus" data-item="wein" data-change="-1"
+                aria-label="Wein weniger" disabled>&minus;</button>
+        <div class="name">Wein<span class="price">4,00 &euro;<br>+ 3,00 &euro; Pfand</span></div>
+        <button type="button" class="plus" data-item="wein" data-change="1" aria-label="Wein mehr">+</button>
+        <div class="quantity">
+          <output class="count" id="wein-count" aria-label="Anzahl Wein">0</output>
+          <output class="subtotal" id="wein-subtotal" aria-label="Summe Wein">0,00 &euro;</output>
+        </div>
+      </div>
+      <div class="item">
+        <button type="button" class="minus" data-item="kipu" data-change="-1"
+                aria-label="KiPu weniger" disabled>&minus;</button>
+        <div class="name">KiPu<span class="price">3,00 &euro;<br>+ 3,00 &euro; Pfand</span></div>
+        <button type="button" class="plus" data-item="kipu" data-change="1" aria-label="KiPu mehr">+</button>
+        <div class="quantity">
+          <output class="count" id="kipu-count" aria-label="Anzahl KiPu">0</output>
+          <output class="subtotal" id="kipu-subtotal" aria-label="Summe KiPu">0,00 &euro;</output>
+        </div>
+      </div>
+      <div class="item">
+        <button type="button" class="minus" data-item="pfand" data-change="-1"
+                aria-label="Pfandr&uuml;ckgabe weniger" disabled>&minus;</button>
+        <div class="name">Pfand<span class="detail">R&uuml;ckgabe</span><span class="price">&minus;3,00 &euro;</span></div>
+        <button type="button" class="plus" data-item="pfand" data-change="1"
+                aria-label="Pfandr&uuml;ckgabe mehr">+</button>
+        <div class="quantity">
+          <output class="count" id="pfand-count" aria-label="Anzahl Pfandr&uuml;ckgabe">0</output>
+          <output class="subtotal" id="pfand-subtotal" aria-label="Summe Pfandr&uuml;ckgabe">0,00 &euro;</output>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <button type="button" id="reset">Reset</button>
+      <div class="total">
+        <label for="total">Gesamt</label>
+        <output id="total" aria-live="polite" aria-atomic="true">0,00 &euro;</output>
+      </div>
+    </footer>
+    <p class="note">
+      Pfandr&uuml;ckgaben werden abgezogen. Ein negativer Gesamtbetrag ist eine Auszahlung.
+    </p>
+    <noscript>Bitte JavaScript aktivieren, um den Preisrechner zu verwenden.</noscript>
+  </main>
+  <script>
+    "use strict";
+
+    const items = {
+      wein: { count: 0, cents: 700 },
+      kipu: { count: 0, cents: 600 },
+      pfand: { count: 0, cents: -300 }
+    };
+    const currency = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
+    const controls = document.querySelectorAll("[data-item]");
+
+    function render() {
+      let totalCents = 0;
+      for (const [name, item] of Object.entries(items)) {
+        const subtotalCents = item.count === 0 ? 0 : item.count * item.cents;
+        document.getElementById(`${name}-count`).textContent = item.count;
+        document.getElementById(`${name}-subtotal`).textContent = currency.format(subtotalCents / 100);
+        totalCents += subtotalCents;
+      }
+      for (const button of controls) {
+        button.disabled = button.dataset.change === "-1" && items[button.dataset.item].count === 0;
+      }
+      document.getElementById("total").textContent = currency.format(totalCents / 100);
+    }
+
+    for (const button of controls) {
+      button.addEventListener("click", () => {
+        const item = items[button.dataset.item];
+        item.count = Math.max(0, item.count + Number(button.dataset.change));
+        render();
+      });
+    }
+
+    document.getElementById("reset").addEventListener("click", () => {
+      for (const item of Object.values(items)) {
+        item.count = 0;
+      }
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
