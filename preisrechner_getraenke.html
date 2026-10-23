@@ -38,9 +38,25 @@
       color: #f6dfe2;
     }
     main { width: min(100%, 440px); margin: 0 auto; padding: 24px 12px; }
-    h1 { margin: 0 0 8px; font-size: 1.8rem; }
+    .title-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    h1 { margin: 0; font-size: 1.8rem; }
     .hint { margin: 0 0 28px; color: #4b6057; line-height: 1.5; }
-    .back { display: inline-block; margin-bottom: 16px; color: #7a1220; font-size: .95rem; }
+    .back {
+      margin-left: auto;
+      flex: none;
+      min-height: 0;
+      padding: 8px 14px;
+      border: 1px solid #e3b7bc;
+      border-radius: 10px;
+      background: #f7dcdd;
+      color: #7a1220;
+      font-size: .9rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .back:focus-visible { outline: 3px solid #aa5700; outline-offset: 3px; }
     .head, .item {
       display: grid;
       grid-template-columns: minmax(56px, 1fr) minmax(76px, .95fr) minmax(56px, 1fr) minmax(68px, .9fr);
@@ -107,8 +123,10 @@
     <span class="banner-subtitle">F&ouml;rderverein Kita St. Joseph</span>
   </header>
   <main>
-    <a class="back" href="./index.html">&larr; Zur&uuml;ck zur Auswahl</a>
-    <h1>Preisrechner Getr&auml;nke</h1>
+    <div class="title-row">
+      <h1>Preisrechner Getr&auml;nke</h1>
+      <a class="back" href="./index.html" aria-label="Zur&uuml;ck zur Auswahl">&larr; Back</a>
+    </div>
     <p class="hint">Getr&auml;nkepreise inklusive 3 &euro; Pfand pro Tasse.</p>
 
     <div class="head" aria-hidden="true"><span>Einzelpreis</span><span>Anzahl / Summe</span></div>
