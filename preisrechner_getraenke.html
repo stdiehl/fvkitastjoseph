@@ -185,12 +185,22 @@
       </div>
       <div class="item">
         <button type="button" class="minus" data-item="flasche" data-change="-1"
-                aria-label="Flasche weniger" disabled>&minus;</button>
-        <div class="name">Flasche<span class="price">8,00 &euro;<br>kein Pfand</span></div>
-        <button type="button" class="plus" data-item="flasche" data-change="1" aria-label="Flasche mehr">+</button>
+                aria-label="Flasche Wein weniger" disabled>&minus;</button>
+        <div class="name">Flasche<br>Wein<span class="price">8,00 &euro;<br>kein Pfand</span></div>
+        <button type="button" class="plus" data-item="flasche" data-change="1" aria-label="Flasche Wein mehr">+</button>
         <div class="quantity">
-          <output class="count" id="flasche-count" aria-label="Anzahl Flasche">0</output>
-          <output class="subtotal" id="flasche-subtotal" aria-label="Summe Flasche">0,00 &euro;</output>
+          <output class="count" id="flasche-count" aria-label="Anzahl Flasche Wein">0</output>
+          <output class="subtotal" id="flasche-subtotal" aria-label="Summe Flasche Wein">0,00 &euro;</output>
+        </div>
+      </div>
+      <div class="item">
+        <button type="button" class="minus" data-item="flasche-kipu" data-change="-1"
+                aria-label="Flasche KiPu weniger" disabled>&minus;</button>
+        <div class="name">Flasche<br>KiPu<span class="price">6,00 &euro;<br>kein Pfand</span></div>
+        <button type="button" class="plus" data-item="flasche-kipu" data-change="1" aria-label="Flasche KiPu mehr">+</button>
+        <div class="quantity">
+          <output class="count" id="flasche-kipu-count" aria-label="Anzahl Flasche KiPu">0</output>
+          <output class="subtotal" id="flasche-kipu-subtotal" aria-label="Summe Flasche KiPu">0,00 &euro;</output>
         </div>
       </div>
     </section>
@@ -211,7 +221,8 @@
       wein: { count: 0, cents: 700 },
       kipu: { count: 0, cents: 600 },
       pfand: { count: 0, cents: -300 },
-      flasche: { count: 0, cents: 800 }
+      flasche: { count: 0, cents: 800 },
+      "flasche-kipu": { count: 0, cents: 600 }
     };
     const currency = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" });
     const controls = document.querySelectorAll("[data-item]");
